@@ -8,7 +8,7 @@ window.globalCurrentLevel = 0; // Global variable for the current level (index s
 window.UniqueID = generateName();
 window.globalLevelState = null; // Sets the globalLevelState to null if you aren't connected to the network. Once connected, the level will generate to the info that was on the block.
 window.globalWasHeroMoving = true;
-// console.log('UniqueID', UniqueID); // Print out your clientsr Unique ID
+// console.log('UniqueID', UniqueID); // Print out your clients Unique ID
 window.text1 = 'Level 1 Occupancy: 0'; // Global text objects for occupancy count
 window.text2 = 'Level 2 Occupancy: 0';
 window.text3 = 'Level 3 Occupancy: 0';
@@ -19,7 +19,7 @@ window.updateOccupancyCounter = false; // Occupancy Counter variable to check if
 window.keyMessages = [];
 
 window.createMyPubNub = function (currentLevel) {
-  // console.log('createMyPubNub', currentLevel);
+   console.log('createMyPubNub', currentLevel);
   window.globalCurrentLevel = currentLevel; // Get the current level and set it to the global level
   window.currentFireChannelName = 'realtimephaserFire2';
   window.currentChannelName = `realtimephaser${currentLevel}`; // Create the channel name + the current level. This way each level is on its own channel.
@@ -138,7 +138,7 @@ window.createMyPubNub = function (currentLevel) {
         try {
           window.globalGameState._removeOtherCharacter(presenceEvent.uuid); // Remove character on leave events if the individual exists
         } catch (err) {
-          // console.log(err)
+           console.log(err)
         }
       }
     }
@@ -153,14 +153,14 @@ window.createMyPubNub = function (currentLevel) {
   // Unsubscribe people from PubNub network
   window.globalUnsubscribe = function () {
     try {
-      // console.log('unsubscribing', window.currentChannelName);
+       console.log('unsubscribing', window.currentChannelName);
       window.pubnub.unsubscribe({
         channels: [window.currentChannelName, window.currentFireChannelName],
         withPresence: true
       });
       window.pubnub.removeListener(window.listener);
     } catch (err) {
-      // console.log("Failed to UnSub");
+       console.log("Failed to UnSub");
     }
   };
   window.pubnub.addListener(window.listener);
@@ -180,7 +180,7 @@ window.createMyPubNub = function (currentLevel) {
             sendByPost: false, // true to send via posts
           });
         }
-          // console.log("send message!")
+           console.log("send message!")
       } catch (err) {
         console.log(err);
       }
@@ -193,7 +193,7 @@ window.fireCoins = () => {
     currentLevel: window.globalCurrentLevel,
     time: window.globalLastTime
   };
-  // console.log('fireCoins', message);
+   console.log('fireCoins', message);
   window.pubnub.fire(
     {
       message,
