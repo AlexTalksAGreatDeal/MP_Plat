@@ -1,6 +1,6 @@
 'use strict';
 
-console.log("Hello world. Main.js started.");
+console.log("Hello (multiplayer) world. Main.js started.");
 
 window.syncOtherPlayerFrameDelay = 0; //30 frames allows for 500ms of network jitter, to prevent late frames
 window.currentChannelName; // Global variable for the current channel that your player character is on
