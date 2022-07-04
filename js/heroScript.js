@@ -27,7 +27,8 @@ window.Hero = class Hero extends window.Phaser.Sprite {
     const SPEED = 200;
 
     this.body.velocity.x = direction * SPEED;
-
+ //  this.body.velocity.y = direction * SPEED;
+    
     // update image flipping & animations
     if (this.body.velocity.x < 0) {
       this.scale.x = -1;
@@ -36,6 +37,7 @@ window.Hero = class Hero extends window.Phaser.Sprite {
     }
   }
 
+  
   jump() {
     // Hero jumping code
     const JUMP_SPEED = 600;
@@ -70,17 +72,38 @@ window.Hero = class Hero extends window.Phaser.Sprite {
 
   // returns the animation name that should be playing depending on
   // current circumstances
-  _getAnimationName() {
+  _getAnimationName() 
+  {
     let name = 'stop'; // default animation
-    if (this.isFrozen) {
+    if (this.isFrozen) 
+    {
       name = 'stop';
-    } else if (this.body.velocity.y < 0) {
+    } else if (this.body.velocity.y < 0) 
+    {
       name = 'jump';
-    } else if (this.body.velocity.y >= 0 && !this.body.touching.down) {
+    } else if (this.body.velocity.y >= 0 && !this.body.touching.down) 
+    {
       name = 'fall';
-    } else if (this.body.velocity.x !== 0 && this.body.touching.down) {
+    } else if (this.body.velocity.x !== 0 && this.body.touching.down) 
+    {
       name = 'run';
     }
     return name;
+/*
+    let name = 'stop'; // default animation
+    if (this.isFrozen) 
+    {
+      name = 'stop';
+    } else if (this.body.velocity.y < 0) 
+    {
+      name = 'run';
+    } else if (this.body.velocity.x < 0) 
+    {
+      name = 'run';
+    }
+    return name;
+*/
+  
+  
   }
 };
