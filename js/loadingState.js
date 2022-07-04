@@ -21,7 +21,7 @@ window.LoadingState = { // Create an object with all of the loading information 
 
     this.game.load.image('font:numbers', 'images/numbers.png');
     this.game.load.image('icon:coin', 'images/coin_icon.png');
-    this.game.load.image('background', 'images/bg.png');
+    this.game.load.image('background', 'images/background.png');
     this.game.load.image('invisible-wall', 'images/invisible_wall.png');
     this.game.load.image('ground', 'images/ground.png');
     this.game.load.image('grass:8x1', 'images/grass_8x1.png');
@@ -32,8 +32,8 @@ window.LoadingState = { // Create an object with all of the loading information 
     this.game.load.image('key', 'images/key.png');
 
     this.game.load.spritesheet('decoration', 'images/decor.png', 42, 42);
-    this.game.load.spritesheet('herodude', 'images/hero.png', 36, 42);
-    this.game.load.spritesheet('hero', 'images/gameSmall.png', 36, 42);
+    this.game.load.spritesheet('herodude', 'images/hero.png', 36, 42); //is this used?
+    this.game.load.spritesheet('hero', 'images/hero.png', 36, 42);
     this.game.load.spritesheet('coin', 'images/coin_animated.png', 22, 22);
     this.game.load.spritesheet('door', 'images/door.png', 42, 66);
     this.game.load.spritesheet('icon:key', 'images/key_icon.png', 34, 30);
