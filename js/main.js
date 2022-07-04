@@ -32,8 +32,13 @@ window.createMyPubNub = function (currentLevel) {
 
   // Setup PubNub Keys
   window.pubnub = new window.PubNub({
-    publishKey: 'pub-c-144006c6-3268-499a-b735-ce033df1873d',
-    subscribeKey: 'sub-c-91189840-af0f-4af6-9ebb-3909785c6d52',
+//Alex's PubNub keys. Currently placing these in breaks the game. Probably because I don't know what I'm doing yet.
+     //   publishKey: 'pub-c-144006c6-3268-499a-b735-ce033df1873d',
+ //   subscribeKey: 'sub-c-91189840-af0f-4af6-9ebb-3909785c6d52',
+     
+     //original keys from demo
+      publishKey: 'pub-c-1c688f67-2435-4622-96e3-d30dfd9d0b37',
+    subscribeKey: 'sub-c-e4c02264-1e13-11e7-894d-0619f8945a4f',
     uuid: window.UniqueID,
   });
 
