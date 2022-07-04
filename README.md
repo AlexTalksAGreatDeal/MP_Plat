@@ -1,6 +1,6 @@
 # Fork of Pubnub's Multiplayer Platform Game#
 
-## Play here: bit.ly/alexmptoy - https://alextalksagreatdeal.github.io/MP_Plat/
+## Play here: www.bit.ly/alexmptoy , long link:  https://alextalksagreatdeal.github.io/MP_Plat/
 
 --
 
