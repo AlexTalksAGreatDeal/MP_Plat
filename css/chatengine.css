@@ -1,5 +1,5 @@
 .chat-container {
-    display: block;
+    display: none;
     width: auto;
     height: inherit;
     overflow: hidden;
@@ -9,18 +9,19 @@
 }
 
 .chat-container .content {
-    display: table;
+    display: none;
     width: 100%;
     height: 100%;
 }
 
 .chat-message {
+    display: none;
     max-width: 900px;
     margin: 10px auto;
 }
 
 .chat-log {
-    display: block;
+    display: none;
     height: 120px;
     width: 98%;
     padding: 0px 10px;
@@ -34,13 +35,13 @@
 }
 
 .chat-input {
-    display: table-row;
+    display: none;
     width: 100%;
     height: 26px;
 }
 
 .chat-input textarea {
-    display: block;
+    display: none;
     width: 96%;
     height: 38px;
     padding: 5px;
