@@ -12,7 +12,8 @@ var rightSideVar = true;
 
 window.frameCounter = 0;
 
-int tintMultiplier = 1;
+
+var tintMultiplier = 1;
 
 public int getTintMultipler()
 {
