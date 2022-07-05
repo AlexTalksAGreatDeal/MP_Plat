@@ -19,6 +19,7 @@ window.Hero = class Hero extends window.Phaser.Sprite {
     this.animations.add('fall', [4]);
     // starting animation
     this.animations.play('stop');
+    this.tint = 87 * 0xffffff;
   }
 
   move(direction) {
