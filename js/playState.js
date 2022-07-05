@@ -143,7 +143,16 @@ window.PlayState = {
     this.keys = this.game.input.keyboard.addKeys({
       left: window.Phaser.KeyCode.LEFT,
       right: window.Phaser.KeyCode.RIGHT,
-      up: window.Phaser.KeyCode.UP
+      up: window.Phaser.KeyCode.UP,
+	  
+	  //new keys as of 7-4-2022, Cardinal directions will 
+	  tint: windowPhaser.KeyCode.T,
+
+	  south: window.PhaserKeyCode.DOWN,
+	  west: window.PhaserKeyCode.LEFT,
+  	  north: window.PhaserKeyCode.UP,
+  	  east: window.PhaserKeyCode.RIGHT
+
     });
     this.coinPickupCount = 0;
     keyCollected = false;
@@ -316,7 +325,7 @@ window.PlayState = {
       }
 
 
-		if(this.keys.y.isDown)
+		if(this.keys.tint.isDown)
 		{
 			tintMultiplier++;
 			this.hero.setTint(tintMultiplier);
