@@ -143,15 +143,15 @@ window.PlayState = {
     this.keys = this.game.input.keyboard.addKeys({
       left: window.Phaser.KeyCode.LEFT,
       right: window.Phaser.KeyCode.RIGHT,
-      up: window.Phaser.KeyCode.UP,
-	  
-	  //new keys as of 7-4-2022, Cardinal directions will 
-	  tint: windowPhaser.KeyCode.T,
-
-	  south: window.PhaserKeyCode.DOWN,
-	  west: window.PhaserKeyCode.LEFT,
-  	  north: window.PhaserKeyCode.UP,
-  	  east: window.PhaserKeyCode.RIGHT
+	  up: window.Phaser.KeyCode.UP,
+	  down: window.Phaser.KeyCode.DOWN,
+	  west: window.Phaser.KeyCode.LEFT,
+  	  north: window.Phaser.KeyCode.UP,
+  	  east: window.Phaser.KeyCode.RIGHT,
+      
+	 tint: window.Phaser.KeyCode.T
+	  //new keys as of 7-4-2022, Cardinal directions will be used later
+	
 
     });
     this.coinPickupCount = 0;
@@ -330,7 +330,7 @@ window.PlayState = {
 			tintMultiplier++;
 			this.hero.setTint(tintMultiplier);
 		}
-
+		
       if (this.keys.left.isDown || (this.game.input.activePointer.x < 399 && (this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero left
         this.hero.move(-1);
       } else if (this.keys.right.isDown || ((this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero right
