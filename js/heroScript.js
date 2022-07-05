@@ -19,7 +19,7 @@ window.Hero = class Hero extends window.Phaser.Sprite {
     this.animations.add('fall', [4]);
     // starting animation
     this.animations.play('stop');
-    this.tint = 87 * 0xffffff;
+   
   }
 
   move(direction) {
@@ -31,13 +31,20 @@ window.Hero = class Hero extends window.Phaser.Sprite {
  //  this.body.velocity.y = direction * SPEED;
     
     // update image flipping & animations
-    if (this.body.velocity.x < 0) {
+    if (this.body.velocity.x < 0) 
+	{
       this.scale.x = -1;
-    } else if (this.body.velocity.x > 0) {
+    } else if (this.body.velocity.x > 0) 
+	{
       this.scale.x = 1;
     }
   }
 
+
+setTint(tintMultiplier)
+{
+	this.tint = tintMultiplier * 0xffffff;
+}
   
   jump() {
     // Hero jumping code

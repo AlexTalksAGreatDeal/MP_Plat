@@ -12,6 +12,20 @@ var rightSideVar = true;
 
 window.frameCounter = 0;
 
+int tintMultiplier = 1;
+
+public int getTintMultipler()
+{
+	return tintMultiplier;
+}
+
+public setTintMultipler(int newMultiplier)
+{
+	tintMultiplier = newMultiplier;
+}
+
+
+
 function logCurrentStateCoin(game, coin) {
   // Log Current Game State of Collected Coins
   for (const value of window.globalLevelState.coinCache.coins) {
@@ -303,6 +317,13 @@ window.PlayState = {
           keyStates.upIsDown = false;
         }
       }
+
+
+		if(this.keys.y.isDown)
+		{
+			tintMultiplier++;
+			this.hero.setTint(tintMultiplier);
+		}
 
       if (this.keys.left.isDown || (this.game.input.activePointer.x < 399 && (this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero left
         this.hero.move(-1);
