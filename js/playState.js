@@ -15,10 +15,6 @@ window.frameCounter = 0;
 
 var tintMultiplier = 1;
 
-getTintMultipler()
-{
-	return tintMultiplier;
-}
 
 setTintMultipler(int newMultiplier)
 {
