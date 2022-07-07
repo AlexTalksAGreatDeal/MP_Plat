@@ -15,6 +15,7 @@ window.frameCounter = 0;
 
 var tintMultiplier = 1;
 
+var alternateControlScheme = true;
 
 function setTintMultipler(newMultiplier)
 {
@@ -144,13 +145,15 @@ window.PlayState = {
       left: window.Phaser.KeyCode.LEFT,
       right: window.Phaser.KeyCode.RIGHT,
 	  up: window.Phaser.KeyCode.UP,
-	  down: window.Phaser.KeyCode.DOWN,
-	  west: window.Phaser.KeyCode.LEFT,
-  	  north: window.Phaser.KeyCode.UP,
-  	  east: window.Phaser.KeyCode.RIGHT,
+	  
+	    // 7-4-2022, Cardinal directions will eventually replace the keys
+	  down: window.Phaser.KeyCode.S,
+	  west: window.Phaser.KeyCode.A,
+  	  north: window.Phaser.KeyCode.W,
+  	  east: window.Phaser.KeyCode.D,
       
+	  swapkeys: window.Phaser.KeyCode.R, //for alternateControlScheme
 	 tint: window.Phaser.KeyCode.T
-	  //new keys as of 7-4-2022, Cardinal directions will be used later
 	
 
     });
@@ -325,27 +328,59 @@ window.PlayState = {
       }
 
 
+//-change hero Tint
 		if(this.keys.tint.isDown)
 		{
 			tintMultiplier++;
 			this.hero.setTint(tintMultiplier);
 		}
+
+	//-swap control scheme
+	if(this.keys.swapkeys.isDown)
+	{
+		//if it's false, make it true. if it's true, make it false.
+		alternateControlScheme = !alternateControlScheme;
+	}
 		
+		//original control scheme
+	if(!alternateControlScheme)
+	{
       if (this.keys.left.isDown || (this.game.input.activePointer.x < 399 && (this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero left
         this.hero.move(-1);
       } else if (this.keys.right.isDown || ((this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero right
         this.hero.move(1);
       } else { // stop
-        this.hero.move(0);
+		
+			this.hero.move(0);
       }
 
       // handle jump
       const JUMP_HOLD = 10;// 200; // ms
-      if (this.keys.up.downDuration(JUMP_HOLD)) {
+      if (this.keys.up.downDuration(JUMP_HOLD)) 
+	  {
         // let didJump = this.hero.jump();
         // if (didJump) { this.sfx.jump.play();}
       }
+	}
 
+
+//--new control scheme
+	if(alternateControlScheme)
+		{
+			// --- cardinal directions
+			if (this.keys.west.isDown)
+			{ // move hero left
+					this.hero.move(-1);
+			} 
+			else if (this.keys.east.isDown) 
+			{ // move hero right
+					this.hero.move(1);
+				  } 
+				  else
+			{ // stop
+					this.hero.move(0);
+			}
+		}
 
       for (const uuid of window.globalOtherHeros.keys()) {
         const otherplayer = window.globalOtherHeros.get(uuid);
