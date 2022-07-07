@@ -315,6 +315,7 @@ window.PlayState = {
         keyStates.rightIsDown = false;
       }
 
+
       if (this.hero.body.touching.down) {
         if (this.keys.up.isDown) {
           if (!keyStates.upIsDown) {
@@ -375,7 +376,25 @@ window.PlayState = {
       }
 	}
 
-
+	
+	if(!alternateControlScheme)
+	{
+		if (window.globalWasHeroMoving && this.hero.body.velocity.x === 0 && this.hero.body.velocity.y === 0 && this.hero.body.touching.down) 
+		{
+		  window.sendKeyMessage({ stopped: 'not moving' });
+		  
+		  if(debugOutput){      console.log('stopped'); }
+		  
+		  window.globalWasHeroMoving = false;
+		} 
+		else if (window.globalWasHeroMoving || this.hero.body.velocity.x !== 0 || this.hero.body.velocity.y !== 0 || !this.hero.body.touching.down) 
+		{
+		  window.globalWasHeroMoving = true;
+		}
+	}
+	
+	
+	
 //--new control scheme
 	if(alternateControlScheme)
 		{
@@ -418,16 +437,23 @@ window.PlayState = {
         }
       }
     }
-
-    if (window.globalWasHeroMoving && this.hero.body.velocity.x === 0 && this.hero.body.velocity.y === 0 && this.hero.body.touching.down) {
-      window.sendKeyMessage({ stopped: 'not moving' });
-	  
-	  if(debugOutput){      console.log('stopped'); }
-	  
-      window.globalWasHeroMoving = false;
-    } else if (window.globalWasHeroMoving || this.hero.body.velocity.x !== 0 || this.hero.body.velocity.y !== 0 || !this.hero.body.touching.down) {
-      window.globalWasHeroMoving = true;
-    }
+	
+	if(!lternateControlScheme)
+	{
+		if (window.globalWasHeroMoving && this.hero.body.velocity.x === 0 && this.hero.body.velocity.y === 0 ) 
+		{
+		  window.sendKeyMessage({ stopped: 'not moving' });
+		  
+		  if(debugOutput){      console.log('stopped'); }
+		  
+		  window.globalWasHeroMoving = false;
+		} 
+		else if (window.globalWasHeroMoving || this.hero.body.velocity.x !== 0 || this.hero.body.velocity.y !== 0) 
+		{
+		  window.globalWasHeroMoving = true;
+		}
+	}
+	
   },
 
   _onHeroVsKey(hero, key) {
@@ -503,9 +529,15 @@ window.PlayState = {
     this._spawnKey(data.key.x, data.key.y);
     this._spawnDoor(data.door.x, data.door.y);
 
-    // enable gravity
-    const GRAVITY = 1200;
-    this.game.physics.arcade.gravity.y = GRAVITY;
+		
+	// enable gravity
+	const GRAVITY = 1200;
+
+		if(!alternateControlScheme)
+		{
+			this.game.physics.arcade.gravity.y = GRAVITY;
+		}
+
   },
 
   _addOtherCharacter(uuid) {
