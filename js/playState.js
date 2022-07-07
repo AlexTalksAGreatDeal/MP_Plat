@@ -148,7 +148,7 @@ window.PlayState = {
 	  up: window.Phaser.KeyCode.UP,
 	  
 	    // 7-4-2022, Cardinal directions will eventually replace the keys
-	  down: window.Phaser.KeyCode.S,
+	  south: window.Phaser.KeyCode.S,
 	  west: window.Phaser.KeyCode.A,
   	  north: window.Phaser.KeyCode.W,
   	  east: window.Phaser.KeyCode.D,
