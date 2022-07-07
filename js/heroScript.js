@@ -88,16 +88,28 @@ setTint(tintMultiplier)
     if (this.isFrozen) 
     {
       name = 'stop';
-    } else if (this.body.velocity.y < 0) 
-    {
-      name = 'jump';
-    } else if (this.body.velocity.y >= 0 && !this.body.touching.down) 
-    {
-      name = 'fall';
-    } else if (this.body.velocity.x !== 0 && this.body.touching.down) 
+    } 
+		else if (this.body.velocity.x !== 0 || this.body.velocity.y !== 0) 
     {
       name = 'run';
+    } 
+	else 
+	{
+		   name = 'stop';
+	}
+	/*
+	else if (this.body.velocity.y < 0) 
+    {
+      name = 'jump';
     }
+		
+			else if (this.body.velocity.y >= 0 && !this.body.touching.down) 
+			{
+			  name = 'fall';
+	  
+    }
+*/
+
     return name;
 /*
     let name = 'stop'; // default animation
