@@ -16,6 +16,7 @@ window.frameCounter = 0;
 var tintMultiplier = 1;
 
 var alternateControlScheme = true;
+var debugOutput = false;
 
 function setTintMultipler(newMultiplier)
 {
@@ -153,8 +154,11 @@ window.PlayState = {
   	  east: window.Phaser.KeyCode.D,
       
 	  swapkeys: window.Phaser.KeyCode.R, //for alternateControlScheme
+	 debug: window.Phaser.KeyCode.Y,
+	 
+	 //--everything above this needs a comma, keep this the last one
 	 tint: window.Phaser.KeyCode.T
-	
+
 
     });
     this.coinPickupCount = 0;
@@ -238,37 +242,37 @@ window.PlayState = {
       // Mobile Controls
         if(this.game.input.pointer1.x < 399 && (this.game.input.pointer1.y > 400) && this.game.input.pointer1.isDown)
         {    
-          console.log("isDown")
+      	  if(debugOutput){    console.log("isDown");}
           if (leftSideVar === true){
             leftSideVar = false
             window.sendKeyMessage({ left: 'down' });
-            console.log("leftDown")
+         	  if(debugOutput){   console.log("leftDown");}
           }
         }
         if(this.game.input.pointer1.isUp && leftSideVar === false)
         {  
           leftSideVar = true;  
           window.sendKeyMessage({ left: 'up' });
-          console.log("leftUp")
+    	  if(debugOutput){      console.log("leftUp");}
         }
         if(this.game.input.pointer1.x > 400 && (this.game.input.pointer1.y > 400) && this.game.input.pointer1.isDown)           
         {                
           if (rightSideVar === true){
             rightSideVar = false
             window.sendKeyMessage({ right: 'down' });
-            console.log("rightDown")
+       	  if(debugOutput){     console.log("rightDown");}
           }          
         }
         if(this.game.input.pointer1.isUp && rightSideVar === false)
         {  
           rightSideVar = true;  
           window.sendKeyMessage({ right: 'up' });
-          console.log("rightUp")
+    	  if(debugOutput){      console.log("rightUp");}
         }
         if((this.game.input.activePointer.y < 401) && this.game.input.activePointer.isDown)
         {
           if (this.hero.body.touching.down) {
-            console.log("jump")
+           	  if(debugOutput){ console.log("jump");}
             if(jumpVar === true){
               jumpVar = false;
               window.sendKeyMessage({ up: 'down' });
@@ -328,12 +332,18 @@ window.PlayState = {
       }
 
 
-//-change hero Tint
-		if(this.keys.tint.isDown)
-		{
-			tintMultiplier++;
-			this.hero.setTint(tintMultiplier);
-		}
+	//-change hero Tint
+	if(this.keys.tint.isDown)
+	{
+		tintMultiplier++;
+		this.hero.setTint(tintMultiplier);
+	}
+
+	//-toggle debug output
+	if(this.keys.debug.isDown)
+	{
+		debugOutput = !debugOutput;
+	}
 
 	//-swap control scheme
 	if(this.keys.swapkeys.isDown)
@@ -342,6 +352,7 @@ window.PlayState = {
 		alternateControlScheme = !alternateControlScheme;
 	}
 		
+//----start setting up our control schemes
 		//original control scheme
 	if(!alternateControlScheme)
 	{
@@ -399,7 +410,9 @@ window.PlayState = {
 
     if (window.globalWasHeroMoving && this.hero.body.velocity.x === 0 && this.hero.body.velocity.y === 0 && this.hero.body.touching.down) {
       window.sendKeyMessage({ stopped: 'not moving' });
-      console.log('stopped');
+	  
+	  if(debugOutput){      console.log('stopped'); }
+	  
       window.globalWasHeroMoving = false;
     } else if (window.globalWasHeroMoving || this.hero.body.velocity.x !== 0 || this.hero.body.velocity.y !== 0 || !this.hero.body.touching.down) {
       window.globalWasHeroMoving = true;
@@ -456,7 +469,7 @@ window.PlayState = {
   },
 
   _loadLevel(data) {
-    // console.log(data)
+  	  if(debugOutput){ console.log(data); }
     // create all the groups/layers that we need
     this.bgDecoration = this.game.add.group();
     this.platforms = this.game.add.group();
@@ -485,7 +498,7 @@ window.PlayState = {
   },
 
   _addOtherCharacter(uuid) {
-    // console.log('Added another character to game');
+  	  if(debugOutput){ console.log('Added another character to game');}
     if (window.globalOtherHeros.has(uuid)) { return; }
     // console.log('_addOtherCharacter', uuid);
     this.hero2 = new window.Hero(this.game, 10, 10);
@@ -523,7 +536,7 @@ window.PlayState = {
     this.game.physics.enable(sprite);
     sprite.body.allowGravity = false;
     sprite.body.immovable = true;
-    // console.log("dank", sprite.body.overlapY)
+    // console.log("spawn platform", sprite.body.overlapY)
   },
 
   _spawnCoin(coin) {
