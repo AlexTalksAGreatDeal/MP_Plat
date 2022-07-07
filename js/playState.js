@@ -357,12 +357,12 @@ window.PlayState = {
 	if(!alternateControlScheme)
 	{
       if (this.keys.left.isDown || (this.game.input.activePointer.x < 399 && (this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero left
-        this.hero.move(-1);
+        this.hero.move(-1,0);
       } else if (this.keys.right.isDown || ((this.game.input.activePointer.y > 400) && this.game.input.activePointer.isDown)) { // move hero right
-        this.hero.move(1);
+        this.hero.move(1,0);
       } else { // stop
 		
-			this.hero.move(0);
+			this.hero.move(0,0);
       }
 
       // handle jump
@@ -381,15 +381,15 @@ window.PlayState = {
 			// --- cardinal directions
 			if (this.keys.west.isDown)
 			{ // move hero left
-					this.hero.move(-1);
+					this.hero.move(-1,0);
 			} 
 			else if (this.keys.east.isDown) 
 			{ // move hero right
-					this.hero.move(1);
+					this.hero.move(1,0);
 				  } 
 				  else
 			{ // stop
-					this.hero.move(0);
+					this.hero.move(0,0);
 			}
 		}
 
@@ -399,11 +399,11 @@ window.PlayState = {
           // otherplayer.jump();
         }
         if (otherplayer.goingLeft) { // move hero left
-          otherplayer.move(-1);
+          otherplayer.move(-1,0);
         } else if (otherplayer.goingRight) { // move hero right
-          otherplayer.move(1);
+          otherplayer.move(1,0);
         } else { // stop
-          otherplayer.move(0);
+          otherplayer.move(0,0);
         }
       }
     }

@@ -22,14 +22,16 @@ window.Hero = class Hero extends window.Phaser.Sprite {
    
   }
 
-  move(direction) {
-    // guard
+  move(xDirection, yDirection) {
+    // "guard" (kick out if frozen)
     if (this.isFrozen) { return; }
     const SPEED = 200;
 
-    this.body.velocity.x = direction * SPEED;
- //  this.body.velocity.y = direction * SPEED;
+	//update our vertical and horizontal positions
+    this.body.velocity.x = xDirection * SPEED;
+	this.body.velocity.y = yDirection * SPEED;
     
+	
     // update image flipping & animations
     if (this.body.velocity.x < 0) 
 	{
