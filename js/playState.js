@@ -332,6 +332,7 @@ window.PlayState = {
       }
 
 
+
 	//-change hero Tint
 	if(this.keys.tint.isDown)
 	{
@@ -386,9 +387,19 @@ window.PlayState = {
 			else if (this.keys.east.isDown) 
 			{ // move hero right
 					this.hero.move(1,0);
-				  } 
+			} 
+			
+			else if (this.keys.north.isDown) 
+			{	//go up
+					this.hero.move(0,-1);
+			}
+			
+			else if (this.keys.south.isDown) 
+			{	//go down
+					this.hero.move(0,1);
+			}
 				  else
-			{ // stop
+			{ 		// stop
 					this.hero.move(0,0);
 			}
 		}
