@@ -111,10 +111,10 @@ function handleKeyMessages() {
           //    otherplayer.position.set(otherplayer.position.x, otherplayer.position + 75)
           // }
           if (messageEvent.message.keyMessage.up === 'down') { // If message equals arrow up, make the player jump with the correct UUID
-            otherplayer.jump();
-            otherplayer.jumpStart = Date.now();
+        //    otherplayer.jump();
+       //     otherplayer.jumpStart = Date.now();
           } else if (messageEvent.message.keyMessage.up === 'up') {
-            otherplayer.jumpStart = 0;
+        //    otherplayer.jumpStart = 0;
           }
           if (messageEvent.message.keyMessage.left === 'down') { // If message equals arrow left, make the player move left with the correct UUID
             otherplayer.goingLeft = true;
