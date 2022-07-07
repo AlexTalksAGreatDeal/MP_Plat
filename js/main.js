@@ -190,7 +190,7 @@ window.createMyPubNub = function (currentLevel) {
             sendByPost: false, // true to send via posts
           });
         }
-           console.log("send message!")
+           //console.log("send message!");
       } catch (err) {
         console.log(err);
       }
