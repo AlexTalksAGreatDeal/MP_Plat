@@ -438,7 +438,7 @@ window.PlayState = {
       }
     }
 	
-	if(!lternateControlScheme)
+	if(!alternateControlScheme)
 	{
 		if (window.globalWasHeroMoving && this.hero.body.velocity.x === 0 && this.hero.body.velocity.y === 0 ) 
 		{
