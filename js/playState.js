@@ -425,9 +425,12 @@ window.PlayState = {
 
       for (const uuid of window.globalOtherHeros.keys()) {
         const otherplayer = window.globalOtherHeros.get(uuid);
-        if (Date.now() + JUMP_HOLD <= otherplayer.jumpStart) {
+        /*
+		if (Date.now() + JUMP_HOLD <= otherplayer.jumpStart) 
+		{
           // otherplayer.jump();
-        }
+        }*/
+		
         if (otherplayer.goingLeft) { // move hero left
           otherplayer.move(-1,0);
         } else if (otherplayer.goingRight) { // move hero right
