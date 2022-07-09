@@ -52,6 +52,7 @@ function handleKeyMessages() {
           otherplayer.initialLocalFrame = window.frameCounter;
           window.sendKeyMessage({}); // Send publish to all clients about user information
         }
+		
         if (messageEvent.message.position && window.globalOtherHeros.has(messageEvent.message.uuid)) { // If the message contains the position of the player and the player has a uuid that matches with one in the level
           window.keyMessages.push(messageEvent);
           const otherplayer = window.globalOtherHeros.get(messageEvent.message.uuid);
@@ -82,8 +83,17 @@ function handleKeyMessages() {
             //console.log('initDelta', initDelta, 'stopping player');
             otherplayer.body.position.set(messageEvent.message.position.x, messageEvent.message.position.y);
             otherplayer.body.velocity.set(0, 0);
+
+			//Other Player Movement Tracking
             otherplayer.goingLeft = false;
             otherplayer.goingRight = false;
+			
+			//Updated OtherPlayer Movement Tracking
+            otherplayer.goingNorth = false;
+            otherplayer.goingSouth = false;
+            otherplayer.goingWest = false;
+            otherplayer.goingEast = false;
+			
             if (otherplayer.totalRecvedFrames > 0) {
               const avgFrameDelay = otherplayer.totalRecvedFrameDelay / otherplayer.totalRecvedFrames;
               const floorFrameDelay = Math.floor(avgFrameDelay);
@@ -105,11 +115,15 @@ function handleKeyMessages() {
           }
 
           otherplayer.lastKeyFrame = messageEvent.message.frameCounter;
+		  
+		  
           // otherplayer.position.set(messageEvent.message.position.x, messageEvent.message.position.y); // set the position of each player according to x y
           // if(otherplayer.position.y >525){ //If the physics pushes a player through the ground, and a message is receieved at a y less than 525, adjust the players position
           //    console.log("glitch")
           //    otherplayer.position.set(otherplayer.position.x, otherplayer.position + 75)
           // }
+		  
+		  
           if (messageEvent.message.keyMessage.up === 'down') { // If message equals arrow up, make the player jump with the correct UUID
         //    otherplayer.jump();
        //     otherplayer.jumpStart = Date.now();
@@ -121,11 +135,30 @@ function handleKeyMessages() {
           } else if (messageEvent.message.keyMessage.left === 'up') {
             otherplayer.goingLeft = false;
           }
-          if (messageEvent.message.keyMessage.right === 'down') { // If message equals arrow down, make the player move right with the correct UUID
+		  
+          if (messageEvent.message.keyMessage.right === 'down') 
+		  { // If message equals arrow down, make the player move right with the correct UUID
             otherplayer.goingRight = true;
-          } else if (messageEvent.message.keyMessage.right === 'up') {
+          } 
+		  else if (messageEvent.message.keyMessage.right === 'up') 
+		  {
             otherplayer.goingRight = false;
           }
+		  
+		  //new keys 2022-07-09
+		   if (messageEvent.message.keyMessage.south === 'down') 
+		  { // If message equals arrow down, make the player move right with the correct UUID
+            otherplayer.goingSouth = true;
+          } 
+		  else if (messageEvent.message.keyMessage.south === 'up') 
+		  {
+            otherplayer.goingSouth = false;
+          }
+		  
+		  
+		  
+		  
+		  
         }
       }
     }
@@ -139,6 +172,7 @@ function handleKeyMessages() {
     window.keyMessages.push(em);
   });
 }
+
 
 window.PlayState = {
   init(data) {
