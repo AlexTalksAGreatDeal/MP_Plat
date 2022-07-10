@@ -145,19 +145,47 @@ function handleKeyMessages() {
             otherplayer.goingRight = false;
           }
 		  
-		  //new keys 2022-07-09
-		   if (messageEvent.message.keyMessage.south === 'down') 
-		  { // If message equals arrow down, make the player move right with the correct UUID
+          //new cardinal direction keys 2022-07-09
+          if (messageEvent.message.keyMessage.south === 'down') 
+          { // If message equals arrow down, make the player move right with the correct UUID
             otherplayer.goingSouth = true;
-          } 
-		  else if (messageEvent.message.keyMessage.south === 'up') 
-		  {
+          }
+          else if (messageEvent.message.keyMessage.south === 'up') 
+          {
             otherplayer.goingSouth = false;
           }
-		  
-		  
-		  
-		  
+
+
+          if (messageEvent.message.keyMessage.north === 'down') 
+          { // If message equals arrow down, make the player move right with the correct UUID
+            otherplayer.goingNorth = true;
+          }
+          else if (messageEvent.message.keyMessage.north === 'up') 
+          {
+            otherplayer.goingNorth = false;
+          }
+
+
+          if (messageEvent.message.keyMessage.east === 'down') 
+          { // If message equals arrow down, make the player move right with the correct UUID
+            otherplayer.goingEast = true;
+          }
+          else if (messageEvent.message.keyMessage.east === 'up') 
+          {
+            otherplayer.goingEast = false;
+          }
+
+
+          if (messageEvent.message.keyMessage.west === 'down') 
+          { // If message equals arrow down, make the player move right with the correct UUID
+            otherplayer.goingWest = true;
+          }
+          else if (messageEvent.message.keyMessage.west === 'up') 
+          {
+            otherplayer.goingWest = false;
+          }
+
+                    
 		  
         }
       }
@@ -457,21 +485,49 @@ window.PlayState = {
 			}
 		}
 
-      for (const uuid of window.globalOtherHeros.keys()) {
-        const otherplayer = window.globalOtherHeros.get(uuid);
-        /*
-		if (Date.now() + JUMP_HOLD <= otherplayer.jumpStart) 
-		{
-          // otherplayer.jump();
-        }*/
-		
-        if (otherplayer.goingLeft) { // move hero left
-          otherplayer.move(-1,0);
-        } else if (otherplayer.goingRight) { // move hero right
-          otherplayer.move(1,0);
-        } else { // stop
-          otherplayer.move(0,0);
-        }
+      for (const uuid of window.globalOtherHeros.keys()) 
+        {
+          const otherplayer = window.globalOtherHeros.get(uuid);
+          /*
+      if (Date.now() + JUMP_HOLD <= otherplayer.jumpStart) 
+      {
+            // otherplayer.jump();
+          }*/
+      
+      //movement for other player
+      
+          if (otherplayer.goingLeft) { // move hero left
+            otherplayer.move(-1,0);
+          } else if (otherplayer.goingRight) { // move hero right
+            otherplayer.move(1,0);
+          } 
+      
+          //new Cardinal Directions
+          else if (otherplayer.goingNorth)
+          {
+            otherplayer.move(0,-1);
+          } 
+          
+          else if(otherplayer.goingSouth)
+          {
+            otherplayer.move(0,1);
+          }
+          
+          else if (otherplayer.goingWest)
+          {
+            otherplayer.move(-1,0);
+          } 
+          
+          else if(otherplayer.goingEast)
+          {
+            otherplayer.move(1,0);
+          }
+          
+          else 
+          { // stop other player
+                otherplayer.move(0,0);
+          }
+
       }
     }
 	
