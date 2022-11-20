@@ -115,6 +115,7 @@ window.createMyPubNub = function (currentLevel)
               includeUUIDs: true,
               includeState: true
             },
+            /*
             (status, response) => {
               console.log('about to change state , this is before we error out 2022-07-09');
               // If I get a valid response from the channel change the text objects to the correct occupancy count
@@ -145,6 +146,7 @@ window.createMyPubNub = function (currentLevel)
               window.textObject2.setText(window.text2);
               window.textObject3.setText(window.text3);
             }
+            */
           );
         }
       }
@@ -166,6 +168,7 @@ window.createMyPubNub = function (currentLevel)
           window.globalGameState._removeOtherCharacter(presenceEvent.uuid); // Remove character on leave events if the individual exists
         } catch (err) {
            console.log(err)
+           console.log("Error when attempting window.globalGameState._removeOtherCharacter)")
         }
       }
     }
@@ -254,6 +257,6 @@ window.addEventListener('load', () => {
   window.createMyPubNub(0); // Connect to the pubnub network and run level code 0
   window.StartLoading = function () {
     game.state.start('loading'); // Run the loading function once you successfully connect to the pubnub network
-    window.initChatEngine();
+
   };
 });

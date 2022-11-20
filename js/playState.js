@@ -639,6 +639,7 @@ window.PlayState = {
     // console.log('_addOtherCharacter', uuid);
     this.hero2 = new window.Hero(this.game, 10, 10);
     this.hero2.lastKeyFrame = 0;
+    //playerText was added in CL a431a25 with chatEngine.  I've removed chatEngine, so this is probably moot.
     const playerText = this.game.add.text(this.hero2.position.x - 10, this.hero2.position.y - 550, '', { fill: '#000000', fontSize: '15px' });
     playerText.anchor.set(0.5);
     this.hero2.addChild(playerText);
