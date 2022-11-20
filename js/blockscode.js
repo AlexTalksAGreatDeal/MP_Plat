@@ -40,7 +40,7 @@ export default (request) => {
         channel: 'realtimephaserFire2',
         message: { value, fromServer: true }
       }).then((publishResponse) => {
-        // console.log(publishResponse);
+         console.log(publishResponse);
       });
     });
   });

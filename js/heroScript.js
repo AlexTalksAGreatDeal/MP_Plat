@@ -22,24 +22,25 @@ window.Hero = class Hero extends window.Phaser.Sprite {
    
   }
 
-  move(xDirection, yDirection) {
-    // "guard" (kick out if frozen)
-    if (this.isFrozen) { return; }
-    const SPEED = 200;
+  move(xDirection, yDirection)  
+  {
+      // "guard" (kick out if frozen)
+      if (this.isFrozen) { return; }
+      const SPEED = 200;
 
-	//update our vertical and horizontal positions
-    this.body.velocity.x = xDirection * SPEED;
-	this.body.velocity.y = yDirection * SPEED;
+    //update our vertical and horizontal positions
+      this.body.velocity.x = xDirection * SPEED;
+    this.body.velocity.y = yDirection * SPEED;
+      
     
-	
-    // update image flipping & animations
-    if (this.body.velocity.x < 0) 
-	{
-      this.scale.x = -1;
-    } else if (this.body.velocity.x > 0) 
-	{
-      this.scale.x = 1;
-    }
+      // update image flipping & animations
+      if (this.body.velocity.x < 0) 
+    {
+        this.scale.x = -1;
+      } else if (this.body.velocity.x > 0) 
+    {
+        this.scale.x = 1;
+      }
   }
 
 
@@ -47,35 +48,11 @@ setTint(tintMultiplier)
 {
 	this.tint = tintMultiplier * 0xffffff;
 }
-  
-  jump() {
-    // Hero jumping code
-    const JUMP_SPEED = 600;
-    const canJump = this.body.touching.down && this.alive && !this.isFrozen;
-    // console.log({
-    //   canJump: canJump,
-    //   'this.body.touching.down': this.body.touching.down,
-    //   'this.alive': this.alive,
-    //   'this.isFrozen': this.isFrozen
-    // });
 
-    if (canJump || this.isBoosting) {
-      this.body.velocity.y = -JUMP_SPEED;
-      this.isBoosting = true;
-      jumpVar = true;  
-    }
-    return canJump;
-  }
+// When player goes through door do animation and remove player
 
-  update() {
-    // update sprite animation, if it needs changing
-    const animationName = this._getAnimationName();
-    if (this.animations.name !== animationName) {
-      this.animations.play(animationName);
-    }
-  }
-
-  freeze() { // When player goes through door do animation and remove player
+  freeze() 
+  {    
     this.body.enable = false;
     this.isFrozen = true;
   }
@@ -89,26 +66,18 @@ setTint(tintMultiplier)
     {
       name = 'stop';
     } 
-		else if (this.body.velocity.x !== 0 || this.body.velocity.y !== 0) 
+		else if (this.body.velocity.x !== 0 )
     {
       name = 'run';
     } 
-	else 
-	{
-		   name = 'stop';
-	}
-	/*
-	else if (this.body.velocity.y < 0) 
+    else if (this.body.velocity.y !== 0) 
     {
-      name = 'jump';
+      name = 'run';
+    } 
+    else 
+    {
+        name = 'stop';
     }
-		
-			else if (this.body.velocity.y >= 0 && !this.body.touching.down) 
-			{
-			  name = 'fall';
-	  
-    }
-*/
 
     return name;
 /*
@@ -125,7 +94,24 @@ setTint(tintMultiplier)
     }
     return name;
 */
-  
-  
+
   }
+
+// =============================================================================
+// Update loop below
+// =============================================================================
+
+
+
+  update() {
+    // update sprite animation, if it needs changing
+    const animationName = this._getAnimationName();
+    if (this.animations.name !== animationName) 
+    {
+      this.animations.play(animationName);
+    }
+  }
+
+
+
 };
