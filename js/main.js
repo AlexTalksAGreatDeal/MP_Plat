@@ -23,24 +23,33 @@ window.updateOccupancyCounter = false; // Occupancy Counter variable to check if
 window.keyMessages = [];
 
 //PubNub integration starts here //Need to make the Functions in PubNub dev panel, check tutorial from PubNubDevelopers/Ninja-Multiplayer-Platformer
-window.createMyPubNub = function (currentLevel) {
+window.createMyPubNub = function (currentLevel) 
+{
    console.log('createMyPubNub', currentLevel);
   window.globalCurrentLevel = currentLevel; // Get the current level and set it to the global level
   window.currentFireChannelName = 'realtimephaserFire2';
   window.currentChannelName = `realtimephaser${currentLevel}`; // Create the channel name + the current level. This way each level is on its own channel.
+
+  console.log('channel created:',window.currentChannelName);
+  console.log('globalCurrentLevel: ',window.globalCurrentLevel);
   let checkIfJoined = false; // If player has joined the channel
 
   // Setup PubNub Keys
-  window.pubnub = new window.PubNub({
+  window.pubnub = new window.PubNub
+  (
+    {
 //NOTE - setting up keys requires 2 functions in your PubNub account. See tutorials from PubNubDevelopers/Ninja-Multiplayer-Platformer
    publishKey: 'pub-c-144006c6-3268-499a-b735-ce033df1873d',
   subscribeKey: 'sub-c-91189840-af0f-4af6-9ebb-3909785c6d52',
+
+  logVerbosity: true,
      
      //original keys from demo
   //    publishKey: 'pub-c-1c688f67-2435-4622-96e3-d30dfd9d0b37',
  //   subscribeKey: 'sub-c-e4c02264-1e13-11e7-894d-0619f8945a4f',
     uuid: window.UniqueID,
-  });
+   }
+  );
 
   // Subscribe to the two PubNub Channels
   window.pubnub.subscribe({
@@ -48,6 +57,7 @@ window.createMyPubNub = function (currentLevel) {
     withPresence: true,
   });
 
+  console.log('subscribed To Channels: ',window.currentChannelName,' ,  ', window.currentFireChannelName);
 
   // Create PubNub Listener for message events
   window.listener = {
@@ -62,7 +72,8 @@ window.createMyPubNub = function (currentLevel) {
     },
 
     message(messageEvent) {
-      if (messageEvent.message.uuid === window.UniqueID) {
+      if (messageEvent.message.uuid === window.UniqueID) 
+      {
         return; // this blocks drawing a new character set by the server for ourselve, to lower latency
       }
       if (messageEvent.channel === window.currentFireChannelName) {
@@ -105,10 +116,16 @@ window.createMyPubNub = function (currentLevel) {
               includeState: true
             },
             (status, response) => {
+              console.log('about to change state , this is before we error out 2022-07-09');
               // If I get a valid response from the channel change the text objects to the correct occupancy count
-              if (typeof (response.channels.realtimephaser0) !== 'undefined') {
+              if (typeof (response.channels.realtimephaser0) !== 'undefined') 
+              {
+                console.log('response.channels.realtimephase0 Is Not Equal To undefined');
                 textResponse1 = response.channels.realtimephaser0.occupancy.toString();
-              } else {
+                console.log(textResponse1);
+              } else 
+              {
+                console.log('error! response.channels.realtimephase0 Is Equal To undefined');
                 textResponse1 = '0';
               }
               if (typeof (response.channels.realtimephaser1) !== 'undefined') {
